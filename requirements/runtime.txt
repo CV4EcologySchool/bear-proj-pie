@@ -6,7 +6,6 @@ tensorboard
 torch>=1.7
 torchvision>=0.8
 tqdm
-wbia-utool
-wbia-utool
-wildbook-ia
+#wbia-utool
+#wildbook-ia
 yacs

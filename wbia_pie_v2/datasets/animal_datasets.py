@@ -155,4 +155,21 @@ class WildHorseFace(COCODataset):
             **kwargs
         )
 
-
+class BearFace(COCODataset):
+    def __init__(self, **kwargs):
+        super(BearFace, self).__init__(
+            name='bear_face',
+            dataset_dir='vchips',
+            dataset_url='',
+            split='v2_train_85_coco_new',
+            crop=False,
+            flip_test=False,
+            resize=False,
+            imsize=150,
+            train_min_samples=3,
+            id_attr=['category_id'],
+            #viewpoint_list=['front'],
+            debug=False,
+            excluded_names='____',
+            **kwargs
+        )
