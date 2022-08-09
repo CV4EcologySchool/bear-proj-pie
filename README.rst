@@ -1,5 +1,5 @@
 ==========================
-Wildbook IA - wbia_pie_v2
+Bear-proj-pie
 ==========================
 
 **The repository is forked and further updated/maintained with** `WildMe <https://github.com/WildMeOrg/wbia-plugin-pie-v2>`_
