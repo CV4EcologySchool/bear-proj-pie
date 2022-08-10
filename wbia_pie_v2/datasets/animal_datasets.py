@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .coco_dataset import COCODataset
 import yaml
+import os.path as osp
 import os
 
 
@@ -29,6 +30,62 @@ class ConfigDataset(COCODataset):
             **kwargs
         )
 
+    def _get_coco_db(self, split):
+        """ Get database from COCO anntations """
+        ann_file = osp.join(
+            self.dataset_dir_orig,
+#            '{}.coco'.format(self.name),
+            '{}.json'.format(split),
+        )
+        if not osp.exists(ann_file):
+            # below path is used on automated datasets
+            ann_file = osp.join(
+                self.dataset_dir,
+                '{}.json'.format(split),
+            )
+
+        dataset = json.load(open(ann_file, 'r'))
+
+        # Get image metadata
+        imgs = {}
+        if 'images' in dataset:
+            for img in dataset['images']:
+                imgs[img['id']] = img
+
+        # Get annots for images from annotations and parts
+        imgToAnns = defaultdict(list)
+        if 'annotations' in dataset:
+            for ann in dataset['annotations']:
+                imgToAnns[ann['image_id']].append(ann)
+
+        if 'parts' in dataset:
+            for ann in dataset['parts']:
+                imgToAnns[ann['image_id']].append(ann)
+
+        image_set_index = list(imgs.keys())
+        print('=> Found {} images in {}'.format(len(image_set_index), ann_file))
+
+        # Get viewpoint annotations from a separate csv
+        if self.viewpoint_csv is not None:
+            uuid2view = np.genfromtxt(
+                self.viewpoint_csv, dtype=str, skip_header=1, delimiter=','
+            )
+            print(
+                '=> Found {} view annotations in {}'.format(
+                    len(uuid2view), self.viewpoint_csv
+                )
+            )
+            uuid2view = {a[0]: a[1] for a in uuid2view}
+        else:
+            uuid2view = None
+
+        # Collect ground truth annotations
+        gt_db = []
+        for index in image_set_index:
+            img_anns = imgToAnns[index]
+            image_path = self._get_image_path(imgs[index]['file_name'])
+            gt_db.extend(self._load_image_annots(img_anns, image_path, uuid2view))
+        return gt_db
 
 def _read_and_validate_dataset_config(config_fpath):
     with open(config_fpath, "r") as stream:
