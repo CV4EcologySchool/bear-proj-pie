@@ -159,9 +159,9 @@ class BearFace(COCODataset):
     def __init__(self, **kwargs):
         super(BearFace, self).__init__(
             name='bear_face',
-            dataset_dir='vchips',
+            dataset_dir='/data/output',
             dataset_url='',
-            split='v2_train_85_coco_new',
+            split='v2_train_85_coco_amended',
             crop=False,
             flip_test=False,
             resize=False,
