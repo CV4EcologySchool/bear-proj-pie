@@ -82,6 +82,9 @@ class COCODataset(ImageDataset):
         self.set_prep_annots()
         self.set_prep_images()
 
+        import IPython
+        IPython.embed()
+
         # Preprocess and load dataset
         if self._preproc_db_exists(self.prep_images, self.prep_annots):
             # Load preprocessed dataset
@@ -394,9 +397,6 @@ class COCODataset(ImageDataset):
         assert isinstance(
             min_samples, int
         ), 'min_samples should be int type , got type {}'.format(type(min_samples))
-
-        import IPython
-        IPython.embed()
 
         # Analyse unique names
         names = np.array([item[name_idx] for item in data])
