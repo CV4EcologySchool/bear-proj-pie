@@ -184,15 +184,13 @@ class COCODataset(ImageDataset):
         ann_file = osp.join(
             self.dataset_dir_orig,
 #            '{}.coco'.format(self.name),
-            'annotations',
-            'instances_{}.json'.format(split),
+            '{}.json'.format(split),
         )
         if not osp.exists(ann_file):
             # below path is used on automated datasets
             ann_file = osp.join(
                 self.dataset_dir,
-                'annotations',
-                'instances_{}.json'.format(split),
+                '{}.json'.format(split),
             )
 
         dataset = json.load(open(ann_file, 'r'))
