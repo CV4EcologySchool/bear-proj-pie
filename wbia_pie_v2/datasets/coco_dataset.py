@@ -244,6 +244,8 @@ class COCODataset(ImageDataset):
                 viewpoint = uuid2view.get(obj['uuid'], 'None')
             #else:
                 #viewpoint = obj['viewpoint']
+            import IPython
+            IPython.embed()
             rec.append(
                 {
                     'image_path': image_path,
