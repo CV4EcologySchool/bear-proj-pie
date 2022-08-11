@@ -82,9 +82,6 @@ class COCODataset(ImageDataset):
         self.set_prep_annots()
         self.set_prep_images()
 
-        import IPython
-        IPython.embed()
-
         # Preprocess and load dataset
         if self._preproc_db_exists(self.prep_images, self.prep_annots):
             # Load preprocessed dataset
@@ -289,8 +286,7 @@ class COCODataset(ImageDataset):
         print('Preprocessing database...')
         prep_gt_db = []
         excluded_records = []
-        import IPython
-        IPython.embed()
+
         for i, db_rec in enumerate(db_coco):
             # Keep only records from specific viewpoints
             if viewpoint_list is not None and db_rec['viewpoint'] not in viewpoint_list:

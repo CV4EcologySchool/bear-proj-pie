@@ -2,6 +2,7 @@ efficientnet-pytorch
 matplotlib
 numpy
 scikit-image
+scikit-learn
 tensorboard
 torch>=1.7
 torchvision>=0.8
