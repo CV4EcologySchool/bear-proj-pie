@@ -225,8 +225,9 @@ class BearFace(COCODataset):
             resize=False,
             imsize=150,
             train_min_samples=3,
-            id_attr=['category_id'],
-            viewpoint_list='',
+            test_min_samples=3,
+            id_attr=['name'],
+            viewpoint_list=['front'],
             debug=False,
             excluded_names='____',
             **kwargs
