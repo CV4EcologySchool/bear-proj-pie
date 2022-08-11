@@ -239,13 +239,14 @@ class COCODataset(ImageDataset):
     def _load_image_annots(self, img_anns, image_path, uuid2view=None):
         """ Get COCO annotations for an image by index """
         rec = []
+        import IPython
+        IPython.embed()
         for i, obj in enumerate(img_anns):
             # if uuid2view is not None:
             #     viewpoint = uuid2view.get(obj['uuid'], 'None')
             #else:
                 #viewpoint = obj['viewpoint']
-            # import IPython
-            # IPython.embed()
+
             rec.append(
                 {
                     'image_path': image_path,
@@ -393,6 +394,9 @@ class COCODataset(ImageDataset):
         assert isinstance(
             min_samples, int
         ), 'min_samples should be int type , got type {}'.format(type(min_samples))
+
+        import IPython
+        IPython.embed()
 
         # Analyse unique names
         names = np.array([item[name_idx] for item in data])
