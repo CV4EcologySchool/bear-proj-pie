@@ -247,7 +247,8 @@ class COCODataset(ImageDataset):
             rec.append(
                 {
                     'image_path': image_path,
-                    'aa_bbox': obj['bbox'],
+                    'aa_bbox': (0,0,150,150)
+                    #'aa_bbox': obj['bbox'],
                     'name': obj['name'],
                     'viewpoint': viewpoint,
                     'obj_id': i,
