@@ -242,8 +242,6 @@ class COCODataset(ImageDataset):
     def _load_image_annots(self, img_anns, image_path, uuid2view=None):
         """ Get COCO annotations for an image by index """
         rec = []
-        import IPython
-        IPython.embed()
         for i, obj in enumerate(img_anns):
             # if uuid2view is not None:
             #     viewpoint = uuid2view.get(obj['uuid'], 'None')
