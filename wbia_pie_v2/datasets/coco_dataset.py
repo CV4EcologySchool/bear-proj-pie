@@ -287,6 +287,8 @@ class COCODataset(ImageDataset):
         print('Preprocessing database...')
         prep_gt_db = []
         excluded_records = []
+        import IPython
+        IPython.embed()
         for i, db_rec in enumerate(db_coco):
             # Keep only records from specific viewpoints
             if viewpoint_list is not None and db_rec['viewpoint'] not in viewpoint_list:
