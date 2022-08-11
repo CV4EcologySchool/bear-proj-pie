@@ -240,19 +240,19 @@ class COCODataset(ImageDataset):
         """ Get COCO annotations for an image by index """
         rec = []
         for i, obj in enumerate(img_anns):
-            if uuid2view is not None:
-                viewpoint = uuid2view.get(obj['uuid'], 'None')
+            # if uuid2view is not None:
+            #     viewpoint = uuid2view.get(obj['uuid'], 'None')
             #else:
                 #viewpoint = obj['viewpoint']
-            import IPython
-            IPython.embed()
+            # import IPython
+            # IPython.embed()
             rec.append(
                 {
                     'image_path': image_path,
                     'aa_bbox': (0,0,150,150),
                     #'aa_bbox': obj['bbox'],
-                    'name': obj['name'],
-                    'viewpoint': viewpoint,
+                    'name': obj['label'],
+                    'viewpoint': 'front',
                     'obj_id': i,
                 }
             )
