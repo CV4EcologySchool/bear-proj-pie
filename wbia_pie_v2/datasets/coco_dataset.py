@@ -242,8 +242,8 @@ class COCODataset(ImageDataset):
         for i, obj in enumerate(img_anns):
             if uuid2view is not None:
                 viewpoint = uuid2view.get(obj['uuid'], 'None')
-            else:
-                viewpoint = obj['viewpoint']
+            #else:
+                #viewpoint = obj['viewpoint']
             rec.append(
                 {
                     'image_path': image_path,
