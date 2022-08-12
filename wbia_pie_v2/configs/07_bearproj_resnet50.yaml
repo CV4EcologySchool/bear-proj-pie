@@ -28,7 +28,7 @@ train:
   optim: 'adam'
   lr: 0.00001
   max_epoch: 1000
-  batch_size: 512
+  batch_size: 1024
   fixbase_epoch: 1
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'multi_step'
