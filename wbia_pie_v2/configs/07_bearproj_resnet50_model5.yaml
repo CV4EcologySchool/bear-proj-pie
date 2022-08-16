@@ -32,7 +32,7 @@ train:
   fixbase_epoch: 1
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'multi_step'
-  stepsize: [50]
+  stepsize: [30]
 
 test:
   batch_size: 100
