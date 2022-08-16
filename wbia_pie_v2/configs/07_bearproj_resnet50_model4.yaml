@@ -8,7 +8,7 @@ data:
   source: 'bear_face'
   height: 150
   width: 150
-  transforms_train: ['resize', 'random_crop', 'random_affine', 'RandomGrayscale']
+  transforms_train: ['resize', 'random_crop', 'random_affine', 'random_grayscale']
   transforms_test: ['resize']
   version: 'v2'
 
