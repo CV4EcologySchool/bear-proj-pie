@@ -105,7 +105,7 @@ def predict(args):
         label_smooth=cfg.loss.softmax.label_smooth,
     )
 
-    rank1, distmat = engine.predict(**engine_run_kwargs(cfg), save_dir=save_dir)
+    rank1, distmat = engine.predict(**engine_predict_kwargs(cfg), save_dir=save_dir)
 
     np.savez(args.output_path, distmat=distmat)
 
