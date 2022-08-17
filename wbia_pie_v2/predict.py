@@ -24,6 +24,7 @@ from default_config import (
     engine_run_kwargs,
     get_default_config,
     lr_scheduler_kwargs,
+    engine_predict_kwargs,
 )
 
 import optim
@@ -104,7 +105,7 @@ def predict(args):
         label_smooth=cfg.loss.softmax.label_smooth,
     )
 
-    rank1, distmat = engine.predict(**engine_run_kwargs(cfg), save_dir=save_dir, tb_dir=tb_dir)
+    rank1, distmat = engine.predict(**engine_run_kwargs(cfg), save_dir=save_dir)
 
     np.savez(args.output_path, distmat=distmat)
 
