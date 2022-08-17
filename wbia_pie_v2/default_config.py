@@ -175,3 +175,14 @@ def engine_run_kwargs(cfg):
         'rerank': cfg.test.rerank,
         'visrank_resize': cfg.test.visrank_resize,
     }
+
+def engine_predict_kwargs(cfg):
+    return {
+        'dist_metric': cfg.test.dist_metric,
+        'normalize_feature': cfg.test.normalize_feature,
+        'visrank': cfg.test.visrank,
+        'visrank_topk': cfg.test.visrank_topk,
+        'ranks': cfg.test.ranks,
+        'rerank': cfg.test.rerank,
+        'visrank_resize': cfg.test.visrank_resize,
+    }
