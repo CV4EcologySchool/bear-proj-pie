@@ -28,29 +28,76 @@ class PIEEngine(Engine):
         ranks=[1, 5, 10, 20],
         rerank=False,
         visrank_resize=True,
+        output_results=False, #added
     ):
         r"""Tests model on target datasets."""
         self.set_model_mode('eval')
 
         name = self.datamanager.source
-        rank1, mAP = self._evaluate(
-            dataset_name=name,
-            test_loader=self.test_loader,
-            dist_metric=dist_metric,
-            normalize_feature=normalize_feature,
-            visrank=visrank,
-            visrank_topk=visrank_topk,
-            save_dir=save_dir,
-            ranks=ranks,
-            rerank=rerank,
-            visrank_resize=visrank_resize,
-        )
+        if not output_results:
+            rank1, mAP = self._evaluate(
+                dataset_name=name,
+                test_loader=self.test_loader,
+                dist_metric=dist_metric,
+                normalize_feature=normalize_feature,
+                visrank=visrank,
+                visrank_topk=visrank_topk,
+                save_dir=save_dir,
+                ranks=ranks,
+                rerank=rerank,
+                visrank_resize=visrank_resize,
+            )
 
-        if self.writer is not None:
-            self.writer.add_scalar(f'Test/{name}/rank1', rank1, self.epoch)
-            self.writer.add_scalar(f'Test/{name}/mAP', mAP, self.epoch)
+            if self.writer is not None:
+                self.writer.add_scalar(f'Test/{name}/rank1', rank1, self.epoch)
+                self.writer.add_scalar(f'Test/{name}/mAP', mAP, self.epoch)
 
-        return rank1
+            return rank1
+        else:
+            rank1, mAP, distmat = self._evaluate(
+                dataset_name=name,
+                test_loader=self.test_loader,
+                dist_metric=dist_metric,
+                normalize_feature=normalize_feature,
+                visrank=visrank,
+                visrank_topk=visrank_topk,
+                save_dir=save_dir,
+                ranks=ranks,
+                rerank=rerank,
+                visrank_resize=visrank_resize,
+                output_results=output_results,
+            )
+
+            if self.writer is not None:
+                self.writer.add_scalar(f'Test/{name}/rank1', rank1, self.epoch)
+                self.writer.add_scalar(f'Test/{name}/mAP', mAP, self.epoch)
+
+            return rank1, distmat
+
+    def predict(
+        self,
+        save_dir='log',
+        dist_metric='euclidean',
+        normalize_feature=False,
+        visrank=False,
+        visrank_topk=10,
+        ranks=[1, 5, 10, 20],
+        rerank=False,
+        visrank_resize=True,
+    ):
+        
+        return self.test(
+                dist_metric=dist_metric,
+                normalize_feature=normalize_feature,
+                visrank=visrank,
+                visrank_topk=visrank_topk,
+                save_dir=save_dir,
+                ranks=ranks,
+                rerank=rerank,
+                visrank_resize=visrank_resize,
+                output_results=True,
+            )
+
 
     @torch.no_grad()
     def _evaluate(
@@ -65,6 +112,7 @@ class PIEEngine(Engine):
         ranks=[1, 5, 10, 20],
         rerank=False,
         visrank_resize=True,
+        output_results=False,
     ):
         batch_time = AverageMeter()
 
@@ -117,5 +165,7 @@ class PIEEngine(Engine):
                 topk=visrank_topk,
                 resize=visrank_resize,
             )
-
-        return cmc[0], mAP
+        if not output_results:
+            return cmc[0], mAP
+        else:
+            return cmc[0], mAP, distmat
