@@ -233,10 +233,13 @@ class COCODataset(ImageDataset):
         gt_db = []
         for index in image_set_index:
             img_anns = imgToAnns[index]
-            for img_ann in img_anns:
-                img_ann['seq_id'] = imgs[index]['seq_id']
+            for idx in range(len(img_anns)):
+                imgToAnns[index][idx]['seq_id'] = imgs[index]['seq_id']
             image_path = self._get_image_path(imgs[index]['file_name'])
             gt_db.extend(self._load_image_annots(img_anns, image_path, uuid2view))
+        
+        import IPython
+        IPython.embed()
         return gt_db
 
     def _load_image_annots(self, img_anns, image_path, uuid2view=None):
@@ -455,7 +458,7 @@ class COCODataset(ImageDataset):
         # Collect unique names and relabel to integer labels
         import IPython
         IPython.embed()
-        
+
         if relabel:
             name_contaiter = set()
             for record in data:
