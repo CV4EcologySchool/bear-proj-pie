@@ -483,8 +483,8 @@ class COCODataset(ImageDataset):
                 name = name2label[name]
                 seq = seq2label[seq]
             output.append((img_path, name, seq))
-
+        print('AFTER DB_TO_TUPLES')
+        import IPython
+        IPython.embed()
+        
         return output
-    print('AFTER DB_TO_TUPLES')
-    import IPython
-    IPython.embed()
