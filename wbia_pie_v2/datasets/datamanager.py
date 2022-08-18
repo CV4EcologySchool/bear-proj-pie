@@ -87,6 +87,9 @@ class AnimalImageDataManager:
 
         self._num_train_pids = self.train_set.num_train_pids
 
+        import IPython
+        IPython.embed()
+        
         self.train_loader = torch.utils.data.DataLoader(
             self.train_set,
             sampler=RandomCopiesIdentitySampler(

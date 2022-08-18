@@ -62,7 +62,7 @@ def get_default_config():
     cfg.train.lr_scheduler = 'single_step'
     cfg.train.stepsize = [20]  # stepsize to decay learning rate
     cfg.train.gamma = 0.1  # learning rate decay multiplier
-    cfg.train.print_freq = 20  # print frequency
+    cfg.train.print_freq = 1  # print frequency
     cfg.train.seed = 1  # random seed
     cfg.train.eval_start = False
 

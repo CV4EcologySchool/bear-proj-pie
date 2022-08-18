@@ -253,6 +253,7 @@ class COCODataset(ImageDataset):
                     'name': obj['label'],
                     'viewpoint': 'front',
                     'obj_id': i,
+                    'seq_id': obj['seq_id'], #added
                 }
             )
         return rec
