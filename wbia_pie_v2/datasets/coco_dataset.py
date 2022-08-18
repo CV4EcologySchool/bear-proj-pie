@@ -458,9 +458,9 @@ class COCODataset(ImageDataset):
         => (image_path, person_id)
         """
         # Collect unique names and relabel to integer labels
-        print('IN DB_TO_TUPLES')
-        import IPython
-        IPython.embed()
+        #print('IN DB_TO_TUPLES')
+        #import IPython
+        #IPython.embed()
 
         if relabel:
             name_contaiter = set()
@@ -485,3 +485,6 @@ class COCODataset(ImageDataset):
             output.append((img_path, name, seq))
 
         return output
+    print('AFTER DB_TO_TUPLES')
+    import IPython
+    IPython.embed()
