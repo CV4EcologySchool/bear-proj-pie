@@ -474,6 +474,9 @@ class COCODataset(ImageDataset):
                 seq = record[seq_key]
                 seq_contaiter.add(seq)
             seq2label = {seq: label for label, seq in enumerate(seq_contaiter)}
+        print('DB_TO_TUPLES')
+        import IPython
+        IPython.embed()
 
         output = []
         for record in data:
@@ -483,8 +486,4 @@ class COCODataset(ImageDataset):
                 name = name2label[name]
                 seq = seq2label[seq]
             output.append((img_path, name, seq))
-        print('AFTER DB_TO_TUPLES')
-        import IPython
-        IPython.embed()
-        
         return output
