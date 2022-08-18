@@ -89,7 +89,7 @@ class AnimalImageDataManager:
 
         import IPython
         IPython.embed()
-        
+
         self.train_loader = torch.utils.data.DataLoader(
             self.train_set,
             sampler=RandomCopiesIdentitySampler(

@@ -443,7 +443,7 @@ class COCODataset(ImageDataset):
         )
         return train_set, test_set
 
-    def db_to_tuples(self, data, relabel=False, name_key='name'):
+    def db_to_tuples(self, data, relabel=False, name_key='name', seq_key='seq_id'):
         """Convert database record to tuples of data for further processing in
         training/testing.
 
@@ -458,12 +458,19 @@ class COCODataset(ImageDataset):
                 name_contaiter.add(name)
             name2label = {name: label for label, name in enumerate(name_contaiter)}
 
+            seq_contaiter = set() #added
+            for record in data:
+                seq = record[seq_key]
+                seq_contaiter.add(seq)
+            seq2label = {seq: label for label, seq in enumerate(seq_contaiter)}
+
         output = []
         for record in data:
             name = record[name_key]
             img_path = record['image_path']
             if relabel:
                 name = name2label[name]
-            output.append((img_path, name))
+                seq = seq2label[seq]
+            output.append((img_path, name, seq))
 
         return output
