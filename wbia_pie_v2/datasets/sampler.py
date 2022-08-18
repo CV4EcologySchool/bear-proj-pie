@@ -44,6 +44,9 @@ class RandomCopiesIdentitySampler(Sampler):
             self.length += num - num % self.num_instances
 
     def __iter__(self):
+        import IPython
+        IPython.embed()
+
         batch_idxs_dict = defaultdict(list)
 
         for pid in self.pids:
