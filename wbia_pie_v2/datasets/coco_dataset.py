@@ -263,6 +263,10 @@ class COCODataset(ImageDataset):
                 }
             )
         return rec
+        
+    print('IN LOAD_IMAGE_ANNOTS')
+    import IPython
+    IPython.embed()
 
     def _get_image_path(self, filename):
         """ Get full path to image in COCO annotations by image filename """
