@@ -3,6 +3,7 @@ from __future__ import division, print_function, absolute_import
 import os
 import os.path as osp
 import json
+from sysconfig import is_python_build
 import imageio
 import numpy as np
 from skimage import img_as_ubyte
@@ -244,7 +245,8 @@ class COCODataset(ImageDataset):
             #     viewpoint = uuid2view.get(obj['uuid'], 'None')
             #else:
                 #viewpoint = obj['viewpoint']
-
+import IPython
+IPython.embed()
             rec.append(
                 {
                     'image_path': image_path,
