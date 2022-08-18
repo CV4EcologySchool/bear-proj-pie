@@ -238,9 +238,9 @@ class COCODataset(ImageDataset):
             image_path = self._get_image_path(imgs[index]['file_name'])
             gt_db.extend(self._load_image_annots(img_anns, image_path, uuid2view))
         
-        print('IN GT_DB')
-        import IPython
-        IPython.embed()
+        #print('IN GT_DB')
+        #import IPython
+        #IPython.embed()
         return gt_db
 
     def _load_image_annots(self, img_anns, image_path, uuid2view=None):
