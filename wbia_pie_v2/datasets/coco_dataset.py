@@ -208,34 +208,33 @@ class COCODataset(ImageDataset):
             for ann in dataset['annotations']:
                 imgToAnns[ann['image_id']].append(ann)
 
-        import IPython
-        IPython.embed()
-        
-        if 'parts' in dataset:
-            for ann in dataset['parts']:
-                imgToAnns[ann['image_id']].append(ann)
+            if 'parts' in dataset:
+                for ann in dataset['parts']:
+                    imgToAnns[ann['image_id']].append(ann)
 
-        image_set_index = list(imgs.keys())
-        print('=> Found {} images in {}'.format(len(image_set_index), ann_file))
+            image_set_index = list(imgs.keys())
+            print('=> Found {} images in {}'.format(len(image_set_index), ann_file))
 
-        # Get viewpoint annotations from a separate csv
-        if self.viewpoint_csv is not None:
-            uuid2view = np.genfromtxt(
-                self.viewpoint_csv, dtype=str, skip_header=1, delimiter=','
-            )
-            print(
-                '=> Found {} view annotations in {}'.format(
-                    len(uuid2view), self.viewpoint_csv
+            # Get viewpoint annotations from a separate csv
+            if self.viewpoint_csv is not None:
+                uuid2view = np.genfromtxt(
+                    self.viewpoint_csv, dtype=str, skip_header=1, delimiter=','
                 )
-            )
-            uuid2view = {a[0]: a[1] for a in uuid2view}
-        else:
-            uuid2view = None
+                print(
+                    '=> Found {} view annotations in {}'.format(
+                        len(uuid2view), self.viewpoint_csv
+                    )
+                )
+                uuid2view = {a[0]: a[1] for a in uuid2view}
+            else:
+                uuid2view = None
 
         # Collect ground truth annotations
         gt_db = []
         for index in image_set_index:
             img_anns = imgToAnns[index]
+            for img_ann in img_anns:
+                img_ann['seq_id'] = imgs[index]['seq_id']
             image_path = self._get_image_path(imgs[index]['file_name'])
             gt_db.extend(self._load_image_annots(img_anns, image_path, uuid2view))
         return gt_db
@@ -248,8 +247,6 @@ class COCODataset(ImageDataset):
             #     viewpoint = uuid2view.get(obj['uuid'], 'None')
             #else:
                 #viewpoint = obj['viewpoint']
-            import IPython
-            IPython.embed()
             rec.append(
                 {
                     'image_path': image_path,
