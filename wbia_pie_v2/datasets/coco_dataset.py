@@ -474,13 +474,14 @@ class COCODataset(ImageDataset):
                 seq = record[seq_key]
                 seq_contaiter.add(seq)
             seq2label = {seq: label for label, seq in enumerate(seq_contaiter)}
-        print('DB_TO_TUPLES')
-        import IPython
-        IPython.embed()
+        # print('DB_TO_TUPLES')
+        # import IPython
+        # IPython.embed()
 
         output = []
         for record in data:
             name = record[name_key]
+            seq = record[seq_key]
             img_path = record['image_path']
             if relabel:
                 name = name2label[name]
