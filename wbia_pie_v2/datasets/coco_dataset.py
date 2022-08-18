@@ -453,6 +453,9 @@ class COCODataset(ImageDataset):
         => (image_path, person_id)
         """
         # Collect unique names and relabel to integer labels
+        import IPython
+        IPython.embed()
+        
         if relabel:
             name_contaiter = set()
             for record in data:
