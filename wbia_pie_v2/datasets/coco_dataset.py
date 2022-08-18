@@ -208,6 +208,9 @@ class COCODataset(ImageDataset):
             for ann in dataset['annotations']:
                 imgToAnns[ann['image_id']].append(ann)
 
+        import IPython
+        IPython.embed()
+        
         if 'parts' in dataset:
             for ann in dataset['parts']:
                 imgToAnns[ann['image_id']].append(ann)
