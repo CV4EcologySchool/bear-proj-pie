@@ -238,6 +238,7 @@ class COCODataset(ImageDataset):
             image_path = self._get_image_path(imgs[index]['file_name'])
             gt_db.extend(self._load_image_annots(img_anns, image_path, uuid2view))
         
+        print('IN GT_DB')
         import IPython
         IPython.embed()
         return gt_db
@@ -373,6 +374,7 @@ class COCODataset(ImageDataset):
                     'name': db_rec['name'],
                     'viewpoint': db_rec['viewpoint'],
                     'id_name': '_'.join([db_rec[att] for att in self.id_attr]),
+                    'seq_id': db_rec['seq_id'],
                 }
             )
 
@@ -456,6 +458,7 @@ class COCODataset(ImageDataset):
         => (image_path, person_id)
         """
         # Collect unique names and relabel to integer labels
+        print('IN DB_TO_TUPLES')
         import IPython
         IPython.embed()
 

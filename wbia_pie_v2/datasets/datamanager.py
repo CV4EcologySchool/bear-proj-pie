@@ -87,6 +87,7 @@ class AnimalImageDataManager:
 
         self._num_train_pids = self.train_set.num_train_pids
 
+        print('IN DATA MANAGER WHERE SAMPLER IS MADE')
         import IPython
         IPython.embed()
 

@@ -44,6 +44,8 @@ class RandomCopiesIdentitySampler(Sampler):
             self.length += num - num % self.num_instances
 
     def __iter__(self):
+        print('IN SAMPLER')
+
         import IPython
         IPython.embed()
 
