@@ -45,26 +45,27 @@ class RandomCopiesIdentitySampler(Sampler):
             self.length += num - num % self.num_instances
 
     def __iter__(self):
-        print('IN SAMPLER')
-
-        import IPython
-        IPython.embed()
-
         batch_idxs_dict = defaultdict(list)
 
         for pid in self.pids:
             idxs = copy.deepcopy(self.index_dic[pid])
+            assert len(set([idx[1] for idx in idxs])) >= self.num_instances, 'BAD BAD BAD'
             if len(idxs) < self.num_instances:
                 idxs = np.random.choice(idxs, size=self.num_instances, replace=True)
             random.shuffle(idxs)
             batch_idxs = []
             ##
+            seen_seq_ids = set([])
             for idx, seq_id in idxs:
+                if seq_id in seen_seq_ids:
+                    continue
+                seen_seq_ids.add(seq_id)
                 batch_idxs.append(idx)
                 if len(batch_idxs) == self.num_instances:
                     batch_idxs_dict[pid].append(batch_idxs)
                     batch_idxs = []
                 ##
+        
         avai_pids = copy.deepcopy(self.pids)
         final_idxs = []
 

@@ -49,7 +49,7 @@ class ImageDataset(object):
             self.show_summary()
 
     def __getitem__(self, index):
-        img_path, pid = self.data[index]
+        img_path, pid, seq_id = self.data[index]
         img = read_image(img_path)
         if self.transform is not None:
             img = self._transform_image(self.transform, self.k_tfm, img)
