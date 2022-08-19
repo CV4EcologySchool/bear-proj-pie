@@ -28,20 +28,20 @@ sampler:
 train:
   optim: 'adam'
   lr: 0.00001
-  max_epoch: 200
-  batch_size: 64
+  max_epoch: 2000
+  batch_size: 84
   fixbase_epoch: 1
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'multi_step'
-  stepsize: [60]
+  stepsize: [1000]
 
 test:
-  batch_size: 100
+  batch_size: 84
   dist_metric: 'euclidean'
   normalize_feature: False
   evaluate: False
-  eval_freq: 10
+  eval_freq: 5
   rerank: False
-  ranks: [1, 5, 12, 20]
+  ranks: [1, 2, 3, 4, 5, 10, 15, 17]
   visrank_topk: 12
   visrank_resize: False
