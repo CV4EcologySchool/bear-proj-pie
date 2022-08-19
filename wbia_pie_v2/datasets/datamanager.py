@@ -103,16 +103,14 @@ class AnimalImageDataManager:
         )
 
         print('=> Loading test dataset')
-        import IPython
-        IPython.embed()
-        
+
         self.test_set = init_image_dataset(
             self.source, transform=self.transform_te, mode='test', root=root, config_fpath=config_fpath
         )
         self.test_loader = torch.utils.data.DataLoader(
             self.test_set,
             sampler=RandomCopiesIdentitySampler(
-                self.test_set.train,
+                self.test_set.test,
                 batch_size=batch_size_test,
                 num_instances=1,
                 num_copies=1,
