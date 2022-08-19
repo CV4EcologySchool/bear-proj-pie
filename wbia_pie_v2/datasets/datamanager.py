@@ -103,7 +103,9 @@ class AnimalImageDataManager:
         )
 
         print('=> Loading test dataset')
-
+        import IPython
+        IPython.embed()
+        
         self.test_set = init_image_dataset(
             self.source, transform=self.transform_te, mode='test', root=root, config_fpath=config_fpath
         )
