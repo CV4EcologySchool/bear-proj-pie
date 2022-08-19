@@ -57,7 +57,7 @@ class RandomCopiesIdentitySampler(Sampler):
             ##
             seen_seq_ids = []
             for idx, seq_id in idxs:
-                if seen_seq_ids.count(seq_id) > 2:
+                if seen_seq_ids.count(seq_id) > 1:
                     continue
                 seen_seq_ids.append(seq_id)
                 batch_idxs.append(idx)
