@@ -29,14 +29,14 @@ train:
   optim: 'adam'
   lr: 0.00001
   max_epoch: 2000
-  batch_size: 84
+  batch_size: 256
   fixbase_epoch: 1
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'multi_step'
   stepsize: [1000]
 
 test:
-  batch_size: 84
+  batch_size: 64
   dist_metric: 'euclidean'
   normalize_feature: False
   evaluate: False
