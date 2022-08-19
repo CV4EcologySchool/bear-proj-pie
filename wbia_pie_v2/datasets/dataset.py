@@ -33,7 +33,7 @@ class ImageDataset(object):
         self.mode = mode
         self.verbose = verbose
 
-        self.num_train_pids = self.get_num_pids(self.train)
+        self.num_train_pids, self.num_train_seq_ids = self.get_num_pids(self.train)
 
         if self.mode == 'train':
             self.data = self.train
