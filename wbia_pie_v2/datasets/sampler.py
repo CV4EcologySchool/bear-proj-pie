@@ -55,11 +55,11 @@ class RandomCopiesIdentitySampler(Sampler):
             random.shuffle(idxs)
             batch_idxs = []
             ##
-            seen_seq_ids = set([])
+            seen_seq_ids = []
             for idx, seq_id in idxs:
-                if seq_id in seen_seq_ids:
+                if seen_seq_ids.count(seq_id) > 1:
                     continue
-                seen_seq_ids.add(seq_id)
+                seen_seq_ids.append(seq_id)
                 batch_idxs.append(idx)
                 if len(batch_idxs) == self.num_instances:
                     batch_idxs_dict[pid].append(batch_idxs)
@@ -76,7 +76,7 @@ class RandomCopiesIdentitySampler(Sampler):
                 final_idxs.extend(duplicate_list(batch_idxs, self.num_copies))
                 if len(batch_idxs_dict[pid]) == 0:
                     avai_pids.remove(pid)
-
+        self.length = len(final_idxs)
         return iter(final_idxs)
 
     def __len__(self):

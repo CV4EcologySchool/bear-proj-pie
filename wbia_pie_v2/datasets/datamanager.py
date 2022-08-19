@@ -109,6 +109,12 @@ class AnimalImageDataManager:
         )
         self.test_loader = torch.utils.data.DataLoader(
             self.test_set,
+            sampler=RandomCopiesIdentitySampler(
+                self.test_set.test,
+                batch_size=batch_size_test,
+                num_instances=1,
+                num_copies=1,
+            ),
             batch_size=batch_size_test,
             shuffle=False,
             num_workers=workers,
