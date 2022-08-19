@@ -111,7 +111,7 @@ class AnimalImageDataManager:
             self.test_set,
             sampler=RandomCopiesIdentitySampler(
                 self.test_set.test,
-                batch_size=batch_size_test,
+                batch_size=1,
                 num_instances=1,
                 num_copies=1,
             ),
