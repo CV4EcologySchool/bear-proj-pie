@@ -2,6 +2,7 @@
 from __future__ import division, absolute_import
 import copy
 import numpy as np
+import utool as ut
 import random
 from collections import defaultdict
 from torch.utils.data.sampler import Sampler
@@ -79,7 +80,7 @@ class RandomCopiesIdentitySampler(Sampler):
         
         avai_pids = copy.deepcopy(self.pids)
         final_idxs = []
-        
+
         while len(avai_pids) >= self.num_pids_per_batch:
             selected_pids = random.sample(avai_pids, self.num_pids_per_batch)
             for pid in selected_pids:
