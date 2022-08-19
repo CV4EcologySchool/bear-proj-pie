@@ -39,14 +39,15 @@ class RandomCopiesIdentitySampler(Sampler):
             self.index_dic[pid].append((index, seq_id))
         self.pids = list(self.index_dic.keys())
 
-        assert MAX_PER_SEQUENCE == 1
+        import IPython
+        IPython.embed()
 
         # estimate number of examples in an epoch
         self.length = 0
         for pid in self.pids:
             idxs = self.index_dic[pid]
             seq_ids = [idx[1] for idx in idxs]
-            assert min(ut.dict_hist(seq_id).values()) >= MAX_PER_SEQUENCE
+            assert min(list(ut.dict_hist(seq_id).values())) >= MAX_PER_SEQUENCE
             num = len(set(seq_ids)) * MAX_PER_SEQUENCE
             if num < self.num_instances:
                 num = self.num_instances
