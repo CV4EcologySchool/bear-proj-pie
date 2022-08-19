@@ -64,7 +64,8 @@ class ImageDataset(object):
         Each tuple in data contains (img_path(s), pid, camid, dsetid).
         """
         pids = set([items[1] for items in data])
-        return len(pids)
+        seq_ids = set([items[2] for items in data])
+        return len(pids), len(seq_ids)
 
     def download_dataset(self, dataset_dir, dataset_url):
         """Downloads and extracts dataset.
@@ -120,13 +121,13 @@ class ImageDataset(object):
         return img
 
     def show_summary(self):
-        num_train_pids = self.get_num_pids(self.train)
-        num_test_pids = self.get_num_pids(self.test)
+        num_train_pids, num_train_seq_ids = self.get_num_pids(self.train)
+        num_test_pids, num_test_seq_ids = self.get_num_pids(self.test)
 
         print('=> Loaded {}'.format(self.__class__.__name__))
         print('  ----------------------------------------')
-        print('  subset   | # ids | # images ')
+        print('  subset   | # ids | # seq_ids | # images ')
         print('  ----------------------------------------')
-        print('  train    | {:5d} |  {:8d} '.format(num_train_pids, len(self.train)))
-        print('  test     | {:5d} |  {:8d} '.format(num_test_pids, len(self.test)))
+        print('  train    | {:5d} | {:5d}     | {:8d} '.format(num_train_pids, num_train_seq_ids, len(self.train)))
+        print('  test     | {:5d} | {:5d}     | {:8d} '.format(num_test_pids, num_test_seq_ids, len(self.test)))
         print('  ----------------------------------------')

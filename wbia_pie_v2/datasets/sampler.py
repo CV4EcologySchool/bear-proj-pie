@@ -53,10 +53,6 @@ class RandomCopiesIdentitySampler(Sampler):
     def __iter__(self):
         batch_idxs_dict = defaultdict(list)
 
-        if len(self.data_source) < 1000:
-            import IPython
-            IPython.embed()
-
         for pid in self.pids:
             idxs = copy.deepcopy(self.index_dic[pid])
             assert len(set([idx[1] for idx in idxs])) >= self.num_instances, 'BAD BAD BAD'
