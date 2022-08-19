@@ -31,7 +31,8 @@ class RandomCopiesIdentitySampler(Sampler):
         self.index_dic = defaultdict(list)
         for index, items in enumerate(data_source):
             pid = items[1]
-            self.index_dic[pid].append(index)
+            seq_id = items[2]
+            self.index_dic[pid].append((index, seq_id))
         self.pids = list(self.index_dic.keys())
 
         # estimate number of examples in an epoch
@@ -57,12 +58,13 @@ class RandomCopiesIdentitySampler(Sampler):
                 idxs = np.random.choice(idxs, size=self.num_instances, replace=True)
             random.shuffle(idxs)
             batch_idxs = []
-            for idx in idxs:
+            ##
+            for idx, seq_id in idxs:
                 batch_idxs.append(idx)
                 if len(batch_idxs) == self.num_instances:
                     batch_idxs_dict[pid].append(batch_idxs)
                     batch_idxs = []
-
+                ##
         avai_pids = copy.deepcopy(self.pids)
         final_idxs = []
 
