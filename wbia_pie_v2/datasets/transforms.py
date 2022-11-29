@@ -13,6 +13,7 @@ from torchvision.transforms import (
     RandomAffine,
     RandomGrayscale,
     GaussianBlur,
+    RandomPerspective, #added_MC
 )
 
 
@@ -185,6 +186,10 @@ def build_transforms(
     if 'blur' in transforms:
         print('+ blur: kernel_size=11, sigma=(0.1, 2.0)')
         transform_tr += [GaussianBlur(kernel_size=11, sigma=(0.1, 2.0))]
+
+    if 'RandomPerspective' in transforms: #added_MC
+        print('+ random perspective: distortion_scale=0.5, p=0.5')
+        transform_tr += [RandomPerspective(distortion_scale=0.5,p=0.5)]    
 
     print('+ to torch tensor of range [0, 1]')
     transform_tr += [ToTensor()]
