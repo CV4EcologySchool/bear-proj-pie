@@ -8,7 +8,7 @@ data:
   source: 'bear_face'
   height: 150
   width: 150
-  transforms_train: ['random_affine','RandomPerspective','blur','random_grayscale','color_jitter']
+  transforms_train: ['random_affine','random_perspective','blur','random_grayscale','color_jitter']
   version: 'v2'
   save_dir: '/data/log' 
 

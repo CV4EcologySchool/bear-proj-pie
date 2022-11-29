@@ -187,7 +187,7 @@ def build_transforms(
         print('+ blur: kernel_size=11, sigma=(0.1, 2.0)')
         transform_tr += [GaussianBlur(kernel_size=11, sigma=(0.1, 2.0))]
 
-    if 'RandomPerspective' in transforms: #added_MC
+    if 'random_perspective' in transforms: #added_MC
         print('+ random perspective: distortion_scale=0.5, p=0.5')
         transform_tr += [RandomPerspective(distortion_scale=0.5,p=0.5)]    
 
