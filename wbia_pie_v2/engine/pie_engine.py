@@ -156,6 +156,8 @@ class PIEEngine(Engine):
             print('Rank-{:<3}: {:.1%}'.format(r, cmc[r - 1]))
 
         if visrank:
+            print (type (self.datamanager.test_set))
+            print (type (test_loader))
             visualize_ranked_results(
                 distmat,
                 test_loader,
