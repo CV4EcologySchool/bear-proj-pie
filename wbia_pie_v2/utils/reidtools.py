@@ -43,7 +43,8 @@ def visualize_ranked_results(
 
     print('# query: {}'.format(num_q))
     print('Visualizing top-{} ranks ...'.format(topk))
-
+    
+    print('query length: {}'.format(len(query)))
     assert num_q == len(query)
 
     indices = np.argsort(distmat, axis=1)
