@@ -157,10 +157,9 @@ class PIEEngine(Engine):
 
         if visrank:
             print (type (self.datamanager.test_set))
-            print (type (test_loader))
             visualize_ranked_results(
                 distmat,
-                test_loader,
+                self.datamanager.test_set,
                 width=self.datamanager.width,
                 height=self.datamanager.height,
                 save_dir=osp.join(save_dir, 'visrank_' + dataset_name),

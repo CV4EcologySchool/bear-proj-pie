@@ -42,5 +42,5 @@ test:
   eval_freq: 10
   rerank: False
   ranks: [1, 2, 3, 4, 5, 10, 15, 17]
-  visrank_topk: 10
+  visrank_topk: 5
   visrank_resize: False
